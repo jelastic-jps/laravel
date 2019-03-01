@@ -1,0 +1,68 @@
+---
+version: '1.4.2'
+type: install
+name: Laravel
+logo: https://raw.githubusercontent.com/vlobzakov/laravel/master/images/logo-transparent.png
+homepage: http://www.laravel.com/
+baseUrl: https://raw.githubusercontent.com/vlobzakov/laravel/master
+
+categories:
+- apps/development
+
+description:
+  /texts/description.md
+
+globals:
+  laravelroot: /var/www/webroot/ROOT
+
+nodes:
+- cloudlets: 16
+  nodeType: apache
+
+onInstall:
+  - laravelconfig
+  - laravelexecutable-install
+  - newdb-project-script
+  - restartNodes:
+    - nodeGroup: cp
+
+actions:
+  laravelconfig:
+    cmd[cp]: |-
+      curl -sS https://getcomposer.org/installer | php
+      mv composer.phar /usr/bin/composer
+      chmod +x /usr/bin/composer
+      cd ${globals.laravelroot}
+      git clone https://github.com/laravel/laravel.git
+      cd ${globals.laravelroot}/laravel
+      composer install
+      chown -R apache.apache ${globals.laravelroot}/laravel
+      chmod -R 755 ${globals.laravelroot}/laravel
+      chmod -R 755 ${globals.laravelroot}/laravel/storage
+      cp .env.example .env
+      php artisan key:generate
+      cat << EOF >> /etc/httpd/conf/httpd.conf
+      <VirtualHost *:80>
+       ServerName ${env.domain}
+       DocumentRoot /${globals.laravelroot}/laravel/public
+       <Directory ${globals.laravelroot}/laravel>
+              AllowOverride All
+       </Directory>
+        </VirtualHost>
+      EOF
+      cd /var/www
+    user: root
+  laravelexecutable-install:
+    cmd[cp]:
+      composer global require "laravel/installer";
+      echo 'export PATH="~/webroot/ROOT/laravel/vendor/bin/:~/.config/composer/vendor/bin/:$PATH"' >> /var/www/.bashrc;
+  newdb-project-script:
+    cmd[cp]:
+      cd ${globals.laravelroot};	
+      wget https://raw.githubusercontent.com/vlobzakov/laravel/master/scripts/newdb-project.sh -O newdb-project.sh;
+      chmod +x newdb-project.sh;
+
+startPage: http://${env.domain}/laravel/public
+
+success:
+  /texts/success.md
