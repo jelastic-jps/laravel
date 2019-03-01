@@ -2,8 +2,8 @@ version: '1.4.2'
 appVersion: latest
 type: install
 name: Laravel
-baseUrl: https://raw.githubusercontent.com/vlobzakov/laravel/master
-logo: https://raw.githubusercontent.com/vlobzakov/laravel/master/images/logo-transparent.png
+baseUrl: https://raw.githubusercontent.com/jelastic-jps/laravel/master
+logo: /images/logo-transparent.png
 homepage: http://www.laravel.com/
 
 categories:
@@ -62,7 +62,7 @@ actions:
   newdb-project-script:
     cmd[cp]:
       cd ${globals.laravelroot};	
-      wget https://raw.githubusercontent.com/vlobzakov/laravel/master/scripts/newdb-project.sh -O newdb-project.sh;
+      wget https://raw.githubusercontent.com/jelastic-jps/laravel/master/scripts/newdb-project.sh -O newdb-project.sh;
       chmod +x newdb-project.sh;
 
 startPage: http://${env.domain}/laravel/public
