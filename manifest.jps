@@ -1,16 +1,17 @@
----
 version: '1.4.2'
+appVersion: latest
 type: install
 name: Laravel
+baseUrl: https://raw.githubusercontent.com/vlobzakov/laravel/master
 logo: https://raw.githubusercontent.com/vlobzakov/laravel/master/images/logo-transparent.png
 homepage: http://www.laravel.com/
-baseUrl: https://raw.githubusercontent.com/vlobzakov/laravel/master
 
 categories:
 - apps/development
 
 description:
-  /texts/description.md
+  text: /texts/description.md
+  short: Open-source PHP web framework for rapid development
 
 globals:
   laravelroot: /var/www/webroot/ROOT
@@ -24,7 +25,7 @@ onInstall:
   - laravelexecutable-install
   - newdb-project-script
   - restartNodes:
-    - nodeGroup: cp
+    - nodeGroup: [cp]
 
 actions:
   laravelconfig:
@@ -52,10 +53,12 @@ actions:
       EOF
       cd /var/www
     user: root
+
   laravelexecutable-install:
     cmd[cp]:
       composer global require "laravel/installer";
       echo 'export PATH="~/webroot/ROOT/laravel/vendor/bin/:~/.config/composer/vendor/bin/:$PATH"' >> /var/www/.bashrc;
+
   newdb-project-script:
     cmd[cp]:
       cd ${globals.laravelroot};	
