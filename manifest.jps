@@ -3,7 +3,7 @@ appVersion: latest
 type: install
 name: Laravel
 baseUrl: https://raw.githubusercontent.com/jelastic-jps/laravel/master
-logo: https://raw.githubusercontent.com/jelastic-jps/laravel/master/images/logo-transparent.png
+logo: /images/logo-transparent.png
 homepage: http://www.laravel.com/
 
 categories:
