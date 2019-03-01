@@ -26,4 +26,4 @@ Wait a few minutes for Jelastic to prepare your environment and set up framework
 
 This information will be also duplicated to you via email.
 
-To find more details on Laravel package installation and use, refer to the [article](http://blog.jelastic.com/.../).
+To find more details on Laravel package installation and use, refer to the [article](https://jelastic.com/blog/laravel-php-framework-in-jelastic-paas).
