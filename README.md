@@ -18,7 +18,7 @@ To install the package manually, log in to the Jelastic dashboard with your cred
 
 ![laravel-installation](images/install.png)
 
-Within the opened installation window, type *Environment* name and optional *Display Name* ([environment alias](https://docs.jelastic.com/environment-aliases)). Also, select the preferable [*Region*](https://docs.jelastic.com/environment-regions) (if several ones are available) and click **Install**.
+Within the opened installation window, type *Environment* name and optional *Display Name* ([environment alias](https://docs.jelastic.com/environment-aliases)). Also, select the preferable [Region](https://docs.jelastic.com/environment-regions) (if several ones are available) and click **Install**.
 
 Wait a few minutes for Jelastic to prepare your environment and set up framework. When finished, you’ll be shown the appropriate notification. Press **Open in Browser** button to make sure that application is up and running. 
 
