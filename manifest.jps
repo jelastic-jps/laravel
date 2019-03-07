@@ -39,19 +39,8 @@ actions:
       composer install
       chown -R apache.apache ${globals.laravelroot}/laravel
       chmod -R 755 ${globals.laravelroot}/laravel
-      chmod -R 755 ${globals.laravelroot}/laravel/storage
       cp .env.example .env
       php artisan key:generate
-      cat << EOF >> /etc/httpd/conf/httpd.conf
-      <VirtualHost *:80>
-       ServerName ${env.domain}
-       DocumentRoot /${globals.laravelroot}/laravel/public
-       <Directory ${globals.laravelroot}/laravel>
-              AllowOverride All
-       </Directory>
-        </VirtualHost>
-      EOF
-      cd /var/www
     user: root
 
   laravelexecutable-install:
@@ -65,7 +54,6 @@ actions:
       wget https://raw.githubusercontent.com/jelastic-jps/laravel/master/scripts/newdb-project.sh -O newdb-project.sh;
       chmod +x newdb-project.sh;
 
-startPage: http://${env.domain}/laravel/public
+startPage: /laravel/public
 
-success:
-  /texts/success.md
+success: /texts/success.md
