@@ -164,7 +164,7 @@ cat << EOF >> $mypath/resources/views/insertForm.blade.php
     <body>
 	<center>
 <font size="10">Edit links and press Replace</font>
-	    <form action="/$proj/public/insert" method="post">
+	    <form action="../../public/insert" method="post">
 	<table border="2">
 	<tr>
 	<td>
