@@ -318,6 +318,6 @@ DB::table("$tablename")->delete();
 EOF
 
 #Adds "Replace" link to the welcome page that leads to Insert Form
-sed -i "s| \+Laravel|\tLaravel\n\t</div><a href=\"\/$proj\/public\/submit\"><font color=\"red\"><h2>Replace links</h2><\/font><\/a>\n\t\t<div><br>|g" $mypath/resources/views/welcome.blade.php
+sed -i "s| \+Laravel|\tLaravel\n\t</div><a href=\"..\/..\/public\/submit\"><font color=\"red\"><h2>Replace links</h2><\/font><\/a>\n\t\t<div><br>|g" $mypath/resources/views/welcome.blade.php
 
 
