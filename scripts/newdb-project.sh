@@ -26,7 +26,7 @@ mysql -u$usr -p$pswd -h$dbhost -e "CREATE DATABASE IF NOT EXISTS $lowercase;"
 sed -i "s|DB_HOST=127.0.0.1|DB_HOST=$dbhost|g" $envfile
 sed -i "s|DB_DATABASE=homestead|DB_DATABASE=$lowercase|g" $envfile
 sed -i "s|DB_USERNAME=homestead|DB_USERNAME=$usr|g" $envfile
-sed -i "s|DB_PASSWORD=secret|DB_PASSWORD=$pswd|g" $envfile
+sed -i "s|^DB_PASSWORD=*.*|DB_PASSWORD=$pswd|g" $envfile
 
 #Changes database credentials in file: config/databse.php
 sed -i "s|'DB_HOST', '127.0.0.1'|'DB_HOST', '$dbhost'|g" $database
@@ -34,7 +34,9 @@ sed -i "s|'DB_DATABASE', 'forge'|'DB_DATABASE', '$lowercase'|g" $database
 sed -i "s|'DB_USERNAME', 'forge'|'DB_USERNAME', '$usr'|g" $database
 sed -i "s|'DB_PASSWORD', ''|'DB_PASSWORD', '$pswd'|g" $database
 
-php artisan make:auth #Rolls out authentications system
+#php artisan make:auth #Rolls out authentications system
+composer require laravel/ui
+php artisan ui vue --auth
 php artisan make:migration create_$lowercase\_table --create=$lowercase #Prepares migration
 
 lastletter='s' #To create a table name the project name should be changed to plural adding s letter
