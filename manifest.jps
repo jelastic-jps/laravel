@@ -52,7 +52,7 @@ actions:
   newdb-project-script:
     cmd[cp]:
       cd ${globals.laravelroot};	
-      wget https://raw.githubusercontent.com/jelastic-jps/laravel/master/scripts/newdb-project.sh -O newdb-project.sh;
+      wget ${baseUrl}/scripts/newdb-project.sh -O newdb-project.sh;
       chmod +x newdb-project.sh;
 
 startPage: /laravel/public

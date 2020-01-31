@@ -23,10 +23,10 @@ mysql -u$usr -p$pswd -h$dbhost -e "CREATE DATABASE IF NOT EXISTS $lowercase;"
 
 #Changes database credentials in file: .env
 #sed -i "s|mysql|pgsql|g" $envfile #Uncomment this line in case of PostgreSQL database or change regexp to use other database type. By default Laravel uses MySQL database
-sed -i "s|DB_HOST=127.0.0.1|DB_HOST=$dbhost|g" $envfile
-sed -i "s|DB_DATABASE=homestead|DB_DATABASE=$lowercase|g" $envfile
-sed -i "s|DB_USERNAME=homestead|DB_USERNAME=$usr|g" $envfile
-sed -i "s|DB_PASSWORD=secret|DB_PASSWORD=$pswd|g" $envfile
+sed -i "s|^DB_HOST=*.*|DB_HOST=$dbhost|g" $envfile
+sed -i "s|^DB_DATABASE=*.*|DB_DATABASE=$lowercase|g" $envfile
+sed -i "s|^DB_USERNAME=*.*|DB_USERNAME=$usr|g" $envfile
+sed -i "s|^DB_PASSWORD=*.*|DB_PASSWORD=$pswd|g" $envfile
 
 #Changes database credentials in file: config/databse.php
 sed -i "s|'DB_HOST', '127.0.0.1'|'DB_HOST', '$dbhost'|g" $database
@@ -34,7 +34,9 @@ sed -i "s|'DB_DATABASE', 'forge'|'DB_DATABASE', '$lowercase'|g" $database
 sed -i "s|'DB_USERNAME', 'forge'|'DB_USERNAME', '$usr'|g" $database
 sed -i "s|'DB_PASSWORD', ''|'DB_PASSWORD', '$pswd'|g" $database
 
-php artisan make:auth #Rolls out authentications system
+#php artisan make:auth #Rolls out authentications system
+composer require laravel/ui
+php artisan ui vue --auth
 php artisan make:migration create_$lowercase\_table --create=$lowercase #Prepares migration
 
 lastletter='s' #To create a table name the project name should be changed to plural adding s letter
@@ -319,5 +321,9 @@ EOF
 
 #Adds "Replace" link to the welcome page that leads to Insert Form
 sed -i "s| \+Laravel|\tLaravel\n\t</div><a href=\"..\/public\/submit\"><font color=\"red\"><h2>Replace links</h2><\/font><\/a>\n\t\t<div><br>|g" $mypath/resources/views/welcome.blade.php
+
+echo
+echo -e "Open in browser \\033[1;32m\033[1mhttp://${HOSTNAME}/$proj/public\033[0m\\033[0;39m "
+echo
 
 
