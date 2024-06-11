@@ -38,10 +38,12 @@ actions:
       git clone https://github.com/laravel/laravel.git
       cd ${globals.laravelroot}/laravel
       composer install
-      chown -R apache.apache ${globals.laravelroot}/laravel
+      chown -R apache:apache ${globals.laravelroot}/laravel
       chmod -R 755 ${globals.laravelroot}/laravel
       cp .env.example .env
       php artisan key:generate
+      php artisan migrate --force
+      chown -R apache:apache ${globals.laravelroot}/laravel/database
     user: root
 
   laravelexecutable-install:
