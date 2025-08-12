@@ -17,6 +17,9 @@ description:
 globals:
   laravelroot: /var/www/webroot/ROOT
 
+ssl: true
+skipNodeEmails: true
+
 nodes:
 - cloudlets: 16
   nodeType: apache
